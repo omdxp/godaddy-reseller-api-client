@@ -409,6 +409,33 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method deleteDomainDnsRecords
+   * @description Delete domain dns records
+   * @param domain - domain
+   * @param type - type
+   * @param name - name
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async deleteDomainDnsRecords(
+    domain: string,
+    type: DnsRecordType,
+    name: string,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/records/${type}/${name}`;
+    const headers = xShopperId
+      ? { ...this.header, "X-Shopper-Id": xShopperId }
+      : this.header;
+    const r = await fetch(url, {
+      method: "DELETE",
+      headers: headers,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region patch methods
