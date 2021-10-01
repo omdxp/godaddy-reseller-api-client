@@ -80,3 +80,15 @@ export interface IPrivacyPurchaseOptions {
     agreementKeys: string[];
   };
 }
+
+export interface IRecord {
+  data: string;
+  name: string;
+  port: number;
+  priority: number;
+  protocol: string;
+  service: string;
+  ttl: number;
+  type: string;
+  weight: number;
+}

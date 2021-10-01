@@ -5,6 +5,7 @@ import {
   IDomainsContactsValidation,
   IPatchDomain,
   IPrivacyPurchaseOptions,
+  IRecord,
   IRes,
   ISchemaRes,
   Sources,
@@ -444,6 +445,27 @@ class Client {
       method: "PATCH",
       headers,
       body: JSON.stringify(contacts),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method patchDomainRecords
+   * @description Patch domain records
+   * @param domain - domain
+   * @param records - records
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async patchDomainRecords(
+    domain: string,
+    records: IRecord[],
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/records`;
+    const r = await fetch(url, {
+      method: "PATCH",
+      headers: { ...this.header, "Content-Type": "application/json" },
+      body: JSON.stringify(records),
     });
     const res = await r.json();
     return { status: r.status, data: res };
