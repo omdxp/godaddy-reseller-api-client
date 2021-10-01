@@ -126,3 +126,13 @@ export type CustomerDomainQuery =
   | "contacts"
   | "dnssecRecords"
   | "registryStatusCodes";
+
+export interface ICustomerRedeemDomain {
+  consent: {
+    price: number;
+    fee: number;
+    currency: string;
+    agreedBy: string;
+    agreedAt: string;
+  };
+}

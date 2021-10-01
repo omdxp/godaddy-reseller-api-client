@@ -4,6 +4,7 @@ import {
   CustomerDomainQuery,
   DnsRecordType,
   IContacts,
+  ICustomerRedeemDomain,
   IDomainsContactsValidation,
   IPatchDomain,
   IPrivacyPurchaseOptions,
@@ -230,6 +231,15 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method getCustomerDomain
+   * @description Get customer domain
+   * @param customerId - customerId
+   * @param domain - domain
+   * @param includes - includes
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
   public async getCustomerDomain(
     customerId: string,
     domain: string,
@@ -481,6 +491,41 @@ class Client {
     const r = await fetch(url, {
       method: "POST",
       headers,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postCustomerRedeem
+   * @description Post customer redeem
+   * @param customerId - customerId
+   * @param domain - domain
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCustomerRedeem(
+    customerId: string,
+    domain: string,
+    body: ICustomerRedeemDomain,
+    xRequestId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/${domain}/redeem`;
+    const headers =
+      xRequestId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Request-Id": `${xRequestId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
     });
     const res = await r.json();
     return { status: r.status, data: res };
