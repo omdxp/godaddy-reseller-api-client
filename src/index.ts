@@ -575,6 +575,29 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method postCustomerForwardConfigByFqdn
+   * @description Post customer forward config by fqdn
+   * @param customerId - customerId
+   * @param fqdn - fqdn
+   * @param body - body
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCustomerForwardConfigByFqdn(
+    customerId: string,
+    fqdn: string,
+    body: IDomainForwardRule,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/forwards/${fqdn}`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: this.header,
+      body: JSON.stringify(body),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region delete methods
