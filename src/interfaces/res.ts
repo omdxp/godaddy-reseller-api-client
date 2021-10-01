@@ -33,3 +33,20 @@ export interface IDomainsContactsValidation {
   domains: string[];
   entityType: "ABORIGINAL";
 }
+
+export interface ISchemaRes {
+  consent: {
+    agreedAt: string;
+    agreedBy: string;
+    agreementKeys: string[];
+  };
+  contactAdmin: IContactInfo;
+  contactBilling: IContactInfo;
+  contactRegistrant: IContactInfo;
+  contactTech: IContactInfo;
+  domain: string;
+  nameServers: string[];
+  period: number;
+  privacy: boolean;
+  renewAuto: boolean;
+}

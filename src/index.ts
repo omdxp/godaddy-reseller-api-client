@@ -1,5 +1,10 @@
 import fetch from "node-fetch";
-import { CheckType, IDomainsContactsValidation, IRes } from "./interfaces/res";
+import {
+  CheckType,
+  IDomainsContactsValidation,
+  IRes,
+  ISchemaRes,
+} from "./interfaces/res";
 
 class Client {
   // constructor
@@ -150,10 +155,41 @@ class Client {
         ? {
             ...this.header,
             "Content-Type": "application/json",
+            "X-Private-Label-Id": `${xPrivateLabelId}`,
           }
         : {
             ...this.header,
-            "X-Private-Label-Id": `${xPrivateLabelId}`,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postPurchase
+   * @param body - body
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postPurchase(
+    body: ISchemaRes,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/purchase`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : {
+            ...this.header,
             "Content-Type": "application/json",
           };
     const r = await fetch(url, {
