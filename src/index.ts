@@ -256,6 +256,14 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method getCustomerForwardInfoByFqdn
+   * @description Get customer forward info by fqdn
+   * @param customerId - customerId
+   * @param fqdn - fqdn
+   * @param includeSubs - includeSubs
+   * @returns {Promise<IRes>} - Promise with response
+   */
   public async getCustomerForwardInfoByFqdn(
     customerId: string,
     fqdn: string,
@@ -263,6 +271,28 @@ class Client {
   ): Promise<IRes> {
     const url = `${this.url}v2/customers/${customerId}/domains/forwards/${fqdn}?includeSubs=${includeSubs}`;
     const r = await fetch(url, { method: "GET", headers: this.header });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method getCustomerDomainActions
+   * @description Get customer domain actions
+   * @param customerId - customerId
+   * @param domain - domain
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCustomerDomainActions(
+    customerId: string,
+    domain: string,
+    xRequestId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/${domain}/actions`;
+    const headers = xRequestId
+      ? { ...this.header, "X-Request-Id": `${xRequestId}` }
+      : this.header;
+    const r = await fetch(url, { method: "GET", headers });
     const res = await r.json();
     return { status: r.status, data: res };
   }
