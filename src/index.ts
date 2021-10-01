@@ -178,6 +178,22 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getDomain
+   * @param domain - domain
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getDomain(domain: string, xShopperId?: string): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}`;
+    const headers = xShopperId
+      ? { ...this.header, "X-Shopper-Id": xShopperId }
+      : this.header;
+    const r = await fetch(url, { headers });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
