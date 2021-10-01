@@ -471,4 +471,39 @@ class Client {
     return { status: r.status, data: res };
   }
   //#endregion
+
+  //#region put methods
+  /**
+   * @method putDomainRecords
+   * @description Put domain records
+   * @param domain - domain
+   * @param records - records
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async putDomainRecords(
+    domain: string,
+    records: IRecord[],
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/records`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "PUT",
+      headers: headers,
+      body: JSON.stringify(records),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+  //#endregion
 }
