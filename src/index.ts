@@ -166,6 +166,18 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getTlds
+   * @description Get tlds
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getTlds(): Promise<IRes> {
+    const url = `${this.url}v1/domains/tlds`;
+    const r = await fetch(url, { headers: this.header });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
