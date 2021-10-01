@@ -531,6 +531,38 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method postCustomerTransferOut
+   * @description Post customer transfer out
+   * @param customerId - customerId
+   * @param domain - domain
+   * @param registrar - registrar
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCustomerTransferOut(
+    customerId: string,
+    domain: string,
+    registrar: string,
+    xRequestId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/${domain}/transferOut?registrar=${registrar}`;
+    const headers =
+      xRequestId !== undefined
+        ? {
+            ...this.header,
+            "X-Request-Id": `${xRequestId}`,
+          }
+        : {
+            ...this.header,
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region delete methods
