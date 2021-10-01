@@ -101,4 +101,6 @@ export type DnsRecordType =
   | "NS"
   | "SOA"
   | "TXT"
-  | "SRV";
+  | "SRV"
+  | "A"
+  | "AAAA";
