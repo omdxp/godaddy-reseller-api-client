@@ -321,6 +321,29 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method deleteDomainPrivacy
+   * @description Delete domain privacy
+   * @param domain - domain
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async deleteDomainPrivacy(
+    domain: string,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/privacy`;
+    const headers = xShopperId
+      ? { ...this.header, "X-Shopper-Id": xShopperId }
+      : this.header;
+    const r = await fetch(url, {
+      method: "DELETE",
+      headers: headers,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region patch methods
