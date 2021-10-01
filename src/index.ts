@@ -4,6 +4,7 @@ import {
   IDomainsContactsValidation,
   IRes,
   ISchemaRes,
+  Sources,
 } from "./interfaces/res";
 
 class Client {
@@ -122,6 +123,46 @@ class Client {
   public async getPurchaseSchema(tld: string): Promise<IRes> {
     const url = `${this.url}v1/domains/purchase/schema/${tld}`;
     const r = await fetch(url, { headers: this.header });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method getSuggestions
+   * @description Get suggestions
+   * @param xShopperId - xShopperId
+   * @param query - query
+   * @param country - country
+   * @param city - city
+   * @param sources - sources
+   * @param tlds - tlds
+   * @param lengthMax - lengthMax
+   * @param lengthMin - lengthMin
+   * @param limit - limit
+   * @param waitMs - waitMs
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getSuggestions(
+    xShopperId?: string,
+    query?: string,
+    country?: string,
+    city?: string,
+    sources?: Sources,
+    tlds?: string[],
+    lengthMax?: number,
+    lengthMin?: number,
+    limit?: number,
+    waitMs?: number,
+  ): Promise<IRes> {
+    const url = `${
+      this.url
+    }v1/domains/suggest?query=${query}&country=${country}&city=${city}&sources=${sources}&tlds=${tlds?.join(
+      ",",
+    )}&lengthMax=${lengthMax}&lengthMin=${lengthMin}&limit=${limit}&waitMs=${waitMs}`;
+    const headers = xShopperId
+      ? { ...this.header, "X-Shopper-Id": xShopperId }
+      : this.header;
+    const r = await fetch(url, { headers });
     const res = await r.json();
     return { status: r.status, data: res };
   }

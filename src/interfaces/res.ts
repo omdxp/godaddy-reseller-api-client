@@ -50,3 +50,5 @@ export interface ISchemaRes {
   privacy: boolean;
   renewAuto: boolean;
 }
+
+export type Sources = "CC_TLD" | "EXTENSTION" | "KEYWORD_SPIN" | "PREMIUM";
