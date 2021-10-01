@@ -254,6 +254,17 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  public async getCustomerForwardInfoByFqdn(
+    customerId: string,
+    fqdn: string,
+    includeSubs: boolean,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/forwards/${fqdn}?includeSubs=${includeSubs}`;
+    const r = await fetch(url, { method: "GET", headers: this.header });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
