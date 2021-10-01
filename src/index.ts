@@ -1,8 +1,14 @@
 import fetch from "node-fetch";
-import { CheckType, IRes } from "./interfaces/res";
+import { CheckType, IDomainsContactsValidation, IRes } from "./interfaces/res";
 
 class Client {
   // constructor
+  /**
+   * @constructor Client
+   * @description Client constructor
+   * @param rccSandbox - rccSandbox
+   * @param apiSecret - apiSecret
+   */
   constructor(rccSandbox: string, apiSecret: string) {
     this._rccSandbox = rccSandbox;
     this._apiSecret = apiSecret;
@@ -104,6 +110,13 @@ class Client {
   //#endregion
 
   //#region post methods
+  /**
+   * @method postAvailable
+   * @description Post available domains
+   * @param domains - domains
+   * @param checkType - checkType
+   * @returns {Promise<IRes>} - Promise with response
+   */
   public async postAvailable(
     domains: string[],
     checkType: CheckType = "FAST",
@@ -117,5 +130,40 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method postContactsValidate
+   * @description Post contacts validation
+   * @param body - body
+   * @param xPrivateLabelId - xPrivateLabelId
+   * @param marketId - marketId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postContactsValidate(
+    body: IDomainsContactsValidation,
+    xPrivateLabelId?: number,
+    marketId: string = "",
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/contacts/validate?marketId=${marketId}`;
+    const headers =
+      xPrivateLabelId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+          }
+        : {
+            ...this.header,
+            "X-Private-Label-Id": `${xPrivateLabelId}`,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
   //#endregion
 }
