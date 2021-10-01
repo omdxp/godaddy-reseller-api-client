@@ -439,6 +439,37 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method postResendVerificationEmail
+   * @description Post resend verification email
+   * @param domain - domain
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postResendVerificationEmail(
+    domain: string,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/verifyRegistrantEmail`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
   //#endregion
 
   //#region delete methods
