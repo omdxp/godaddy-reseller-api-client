@@ -236,9 +236,9 @@ class Client {
     includes: CustomerDomainQuery,
     xRequestId?: string,
   ): Promise<IRes> {
-    const url = `${this.url}v1/customers/${customerId}/domains/${domain}?includes=${includes}`;
+    const url = `${this.url}v2/customers/${customerId}/domains/${domain}?includes=${includes}`;
     const headers = xRequestId
-      ? { ...this.header, "X-Request-Id": xRequestId }
+      ? { ...this.header, "X-Request-Id": `${xRequestId}` }
       : this.header;
     const r = await fetch(url, { method: "GET", headers });
     const res = await r.json();
