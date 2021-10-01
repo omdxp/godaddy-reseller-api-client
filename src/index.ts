@@ -631,6 +631,26 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method deleteCustomerDomainByFqdn
+   * @description Delete customer domain by fqdn
+   * @param customerId - customerId
+   * @param fqdn - fqdn
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async deleteCustomerDomainByFqdn(
+    customerId: string,
+    fqdn: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/forwards/${fqdn}`;
+    const r = await fetch(url, {
+      method: "DELETE",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region patch methods
