@@ -5,6 +5,7 @@ import {
   DnsRecordType,
   IContacts,
   ICustomerRedeemDomain,
+  IDomainForwardRule,
   IDomainsContactsValidation,
   IPatchDomain,
   IPrivacyPurchaseOptions,
@@ -857,6 +858,29 @@ class Client {
       method: "PUT",
       headers: headers,
       body: JSON.stringify(records),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method putCustomerForwardInfoByFqdn
+   * @description Put customer forward info by fqdn
+   * @param customerId - customerId
+   * @param fqdn - fqdn
+   * @param body - body
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async putCustomerForwardInfoByFqdn(
+    customerId: string,
+    fqdn: string,
+    body: IDomainForwardRule,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/forwards/${fqdn}`;
+    const r = await fetch(url, {
+      method: "PUT",
+      headers: { ...this.header, "Content-Type": "application/json" },
+      body: JSON.stringify(body),
     });
     const res = await r.json();
     return { status: r.status, data: res };

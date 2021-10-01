@@ -136,3 +136,13 @@ export interface ICustomerRedeemDomain {
     agreedAt: string;
   };
 }
+
+export interface IDomainForwardRule {
+  type: string;
+  url: string;
+  mask: {
+    title: string;
+    description: string;
+    keywords: string;
+  };
+}
