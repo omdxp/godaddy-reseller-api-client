@@ -72,3 +72,11 @@ export interface IContacts {
   contactRegistrant: IContactInfo;
   contactTech: IContactInfo;
 }
+
+export interface IPrivacyPurchaseOptions {
+  consent: {
+    agreedAt: string;
+    agreedBy: string;
+    agreementKeys: string[];
+  };
+}

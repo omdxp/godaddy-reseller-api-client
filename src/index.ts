@@ -4,6 +4,7 @@ import {
   IContacts,
   IDomainsContactsValidation,
   IPatchDomain,
+  IPrivacyPurchaseOptions,
   IRes,
   ISchemaRes,
   Sources,
@@ -294,6 +295,40 @@ class Client {
   public async postPurchaseValidate(body: ISchemaRes): Promise<IRes> {
     const url = `${this.url}v1/domains/purchase/validate`;
     const headers = { ...this.header, "Content-Type": "application/json" };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postPrivacyPurchase
+   * @description Post privacy purchase
+   * @param domain - domain
+   * @param body - body
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postPrivacyPurchase(
+    domain: string,
+    body: IPrivacyPurchaseOptions,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/privacy/purchase`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
     const r = await fetch(url, {
       method: "POST",
       headers,
