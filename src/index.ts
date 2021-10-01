@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { IRes } from "./interfaces/res";
+import { CheckType, IRes } from "./interfaces/res";
 
 class Client {
   // constructor
@@ -49,8 +49,17 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method getAgreements
+   * @description Get all agreements
+   * @param xMarketId - xMarketId
+   * @param tlds - tlds
+   * @param privacy - privacy
+   * @param forTransfer - forTransfer
+   * @returns {Promise<IRes>} - Promise with response
+   */
   public async getAgreements(
-    xMarketId: string = "",
+    xMarketId: string = "en-US",
     tlds: string[],
     privacy: boolean,
     forTransfer: boolean = true,
@@ -68,8 +77,27 @@ class Client {
             "X-Market-Id": xMarketId,
           };
     const r = await fetch(url, {
-      headers: headers,
+      headers,
     });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method getAvailable
+   * @description Get available domains
+   * @param domain - domain
+   * @param checkType - checkType
+   * @param forTransfer - forTransfer
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getAvailable(
+    domain: string,
+    checkType: CheckType = "FAST",
+    forTransfer: boolean = true,
+  ) {
+    const url = `${this.url}v1/domains/available?domain=${domain}&checkType=${checkType}&forTransfer=${forTransfer}`;
+    const r = await fetch(url, { headers: this.header });
     const res = await r.json();
     return { status: r.status, data: res };
   }
