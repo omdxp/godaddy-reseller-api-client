@@ -92,3 +92,13 @@ export interface IRecord {
   type: string;
   weight: number;
 }
+
+export type DnsRecordType =
+  | "HAS"
+  | "YYYY"
+  | "CNAME"
+  | "MX"
+  | "NS"
+  | "SOA"
+  | "TXT"
+  | "SRV";

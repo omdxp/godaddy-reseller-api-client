@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import {
   CheckType,
+  DnsRecordType,
   IContacts,
   IDomainsContactsValidation,
   IPatchDomain,
@@ -195,6 +196,34 @@ class Client {
       ? { ...this.header, "X-Shopper-Id": xShopperId }
       : this.header;
     const r = await fetch(url, { headers });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method getDnsRecords
+   * @description Get dns records
+   * @param domain - domain
+   * @param type - type
+   * @param name - name
+   * @param xShopperId - xShopperId
+   * @param offset - offset
+   * @param limit - limit
+   * @returns
+   */
+  public async getDnsRecords(
+    domain: string,
+    type: DnsRecordType,
+    name: string,
+    xShopperId?: string,
+    offset: number = 0,
+    limit: number = 10,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/records/${type}/${name}?offset=${offset}&limit=${limit}`;
+    const headers = xShopperId
+      ? { ...this.header, "X-Shopper-Id": xShopperId }
+      : this.header;
+    const r = await fetch(url, { method: "GET", headers });
     const res = await r.json();
     return { status: r.status, data: res };
   }
