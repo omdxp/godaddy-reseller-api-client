@@ -120,3 +120,9 @@ export interface ITransferDomainPurchase {
   contactRegistrant: IContactInfo;
   contactTech: IContactInfo;
 }
+
+export type CustomerDomainQuery =
+  | "actions"
+  | "contacts"
+  | "dnssecRecords"
+  | "registryStatusCodes";

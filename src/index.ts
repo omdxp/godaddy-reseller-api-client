@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import {
   CheckType,
+  CustomerDomainQuery,
   DnsRecordType,
   IContacts,
   IDomainsContactsValidation,
@@ -223,6 +224,21 @@ class Client {
     const url = `${this.url}v1/domains/${domain}/records/${type}/${name}?offset=${offset}&limit=${limit}`;
     const headers = xShopperId
       ? { ...this.header, "X-Shopper-Id": xShopperId }
+      : this.header;
+    const r = await fetch(url, { method: "GET", headers });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  public async getCustomerDomain(
+    customerId: string,
+    domain: string,
+    includes: CustomerDomainQuery,
+    xRequestId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/customers/${customerId}/domains/${domain}?includes=${includes}`;
+    const headers = xRequestId
+      ? { ...this.header, "X-Request-Id": xRequestId }
       : this.header;
     const r = await fetch(url, { method: "GET", headers });
     const res = await r.json();
