@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
 import {
+  ActionType,
   CheckType,
   CustomerDomainQuery,
   DnsRecordType,
@@ -712,6 +713,37 @@ class Client {
     const r = await fetch(url, {
       method: "DELETE",
       headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method deleteCustomerRecentDomainAction
+   * @description Delete customer recent domain action
+   * @param customerId - customerId
+   * @param domain - domain
+   * @param type - type
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async deleteCustomerRecentDomainAction(
+    customerId: string,
+    domain: string,
+    type: ActionType,
+    xRequestId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/${domain}/actions/${type}`;
+    const headers =
+      xRequestId !== undefined
+        ? {
+            ...this.header,
+            "X-Request-Id": `${xRequestId}`,
+          }
+        : this.header;
+    const r = await fetch(url, {
+      method: "DELETE",
+      headers,
     });
     const res = await r.json();
     return { status: r.status, data: res };
