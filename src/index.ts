@@ -37,9 +37,39 @@ class Client {
   private url: string = "https://api.ote-godaddy.com/";
 
   // methods
+  /**
+   * @method getDomains
+   * @description Get all domains
+   * @returns {Promise<IRes>} - Promise with response
+   */
   public async getDomains(): Promise<IRes> {
     const url = `${this.url}v1/domains`;
     const r = await fetch(url, { headers: this.header });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  public async getAgreements(
+    xMarketId: string = "",
+    tlds: string[],
+    privacy: boolean,
+    forTransfer: boolean = true,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/agreements?tlds=${tlds.join(
+      ",",
+    )}&privacy=${privacy}&forTransfer=${forTransfer}`;
+    const headers =
+      xMarketId !== ""
+        ? {
+            ...this.header,
+          }
+        : {
+            ...this.header,
+            "X-Market-Id": xMarketId,
+          };
+    const r = await fetch(url, {
+      headers: headers,
+    });
     const res = await r.json();
     return { status: r.status, data: res };
   }
