@@ -534,5 +534,43 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method putDomainDnsRecords
+   * @description Put domain dns records
+   * @param domain - domain
+   * @param type - type
+   * @param name - name
+   * @param records - records
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async putDomainDnsRecords(
+    domain: string,
+    type: DnsRecordType,
+    name: string,
+    records: IRecord[],
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/records/${type}/${name}`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "PUT",
+      headers: headers,
+      body: JSON.stringify(records),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 }
