@@ -286,4 +286,22 @@ class Client {
   }
 
   //#endregion
+
+  //#region delete methods
+  /**
+   * @method deleteDomain
+   * @description Delete domain
+   * @param domain - domain
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async deleteDomain(domain: string): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}`;
+    const r = await fetch(url, {
+      method: "DELETE",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+  //#endregion
 }
