@@ -65,3 +65,10 @@ export interface IPatchDomain {
     agreementKeys: string[];
   };
 }
+
+export interface IContacts {
+  contactAdmin: IContactInfo;
+  contactBilling: IContactInfo;
+  contactRegistrant: IContactInfo;
+  contactTech: IContactInfo;
+}

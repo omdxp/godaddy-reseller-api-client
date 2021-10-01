@@ -1,6 +1,7 @@
 import fetch from "node-fetch";
 import {
   CheckType,
+  IContacts,
   IDomainsContactsValidation,
   IPatchDomain,
   IRes,
@@ -351,6 +352,40 @@ class Client {
       method: "PATCH",
       headers,
       body: JSON.stringify(body),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method patchDomainContacts
+   * @description Patch domain contacts
+   * @param domain - domain
+   * @param contacts - contacts
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async patchDomainContacts(
+    domain: string,
+    contacts: IContacts,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/contacts`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify(contacts),
     });
     const res = await r.json();
     return { status: r.status, data: res };
