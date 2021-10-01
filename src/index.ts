@@ -2,6 +2,7 @@ import fetch from "node-fetch";
 import {
   CheckType,
   IDomainsContactsValidation,
+  IPatchDomain,
   IRes,
   ISchemaRes,
   Sources,
@@ -315,6 +316,41 @@ class Client {
     const r = await fetch(url, {
       method: "DELETE",
       headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+  //#endregion
+
+  //#region patch methods
+  /**
+   * @method patchDomain
+   * @param domain - domain
+   * @param body - body
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async patchDomain(
+    domain: string,
+    body: IPatchDomain,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify(body),
     });
     const res = await r.json();
     return { status: r.status, data: res };

@@ -52,3 +52,16 @@ export interface ISchemaRes {
 }
 
 export type Sources = "CC_TLD" | "EXTENSTION" | "KEYWORD_SPIN" | "PREMIUM";
+
+export interface IPatchDomain {
+  locked: boolean;
+  nameServers: string[];
+  renewAuto: boolean;
+  subaccountId: string;
+  exposeWhois: boolean;
+  consent: {
+    agreedAt: string;
+    agreedBy: string;
+    agreementKeys: string[];
+  };
+}
