@@ -297,6 +297,25 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getCustomerRecentDomainAction
+   * @description Get customer recent domain action
+   * @param customerId - customerId
+   * @param domain - domain
+   * @param type - type
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCustomerRecentDomainAction(
+    customerId: string,
+    domain: string,
+    type: ActionType,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/${domain}/actions/${type}`;
+    const r = await fetch(url, { method: "GET", headers: this.header });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
