@@ -316,6 +316,26 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getCustomerNextDomainNotification
+   * @description Get customer next domain notification
+   * @param customerId - customerId
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCustomerNextDomainNotification(
+    customerId: string,
+    xRequestId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/notifications`;
+    const headers = xRequestId
+      ? { ...this.header, "X-Request-Id": `${xRequestId}` }
+      : this.header;
+    const r = await fetch(url, { method: "GET", headers });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
