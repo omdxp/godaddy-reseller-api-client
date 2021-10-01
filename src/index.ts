@@ -36,7 +36,7 @@ class Client {
 
   private url: string = "https://api.ote-godaddy.com/";
 
-  // methods
+  //#region get methods
   /**
    * @method getDomains
    * @description Get all domains
@@ -95,10 +95,27 @@ class Client {
     domain: string,
     checkType: CheckType = "FAST",
     forTransfer: boolean = true,
-  ) {
+  ): Promise<IRes> {
     const url = `${this.url}v1/domains/available?domain=${domain}&checkType=${checkType}&forTransfer=${forTransfer}`;
     const r = await fetch(url, { headers: this.header });
     const res = await r.json();
     return { status: r.status, data: res };
   }
+  //#endregion
+
+  //#region post methods
+  public async postAvailable(
+    domains: string[],
+    checkType: CheckType = "FAST",
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/available?checkType=${checkType}`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { ...this.header, "Content-Type": "application/json" },
+      body: JSON.stringify(domains),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+  //#endregion
 }
