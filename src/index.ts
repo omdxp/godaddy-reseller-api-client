@@ -214,5 +214,23 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method postPurchaseValidate
+   * @description Post purchase validate
+   * @param body - body
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postPurchaseValidate(body: ISchemaRes): Promise<IRes> {
+    const url = `${this.url}v1/domains/purchase/validate`;
+    const headers = { ...this.header, "Content-Type": "application/json" };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
   //#endregion
 }
