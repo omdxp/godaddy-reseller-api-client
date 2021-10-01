@@ -104,3 +104,19 @@ export type DnsRecordType =
   | "SRV"
   | "A"
   | "AAAA";
+
+export interface ITransferDomainPurchase {
+  authCode: string;
+  consent: {
+    agreedAt: string;
+    agreedBy: string;
+    agreementKeys: string[];
+  };
+  period: number;
+  privacy: boolean;
+  renewAuto: boolean;
+  contactAdmin: IContactInfo;
+  contactBilling: IContactInfo;
+  contactRegistrant: IContactInfo;
+  contactTech: IContactInfo;
+}

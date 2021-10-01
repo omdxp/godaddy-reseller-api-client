@@ -9,6 +9,7 @@ import {
   IRecord,
   IRes,
   ISchemaRes,
+  ITransferDomainPurchase,
   Sources,
 } from "./interfaces/res";
 
@@ -384,6 +385,40 @@ class Client {
     xShopperId?: string,
   ): Promise<IRes> {
     const url = `${this.url}v1/domains/${domain}/renew`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postTransferDomain
+   * @description Post transfer domain
+   * @param domain - domain
+   * @param body - body
+   * @param xShopperId - xShopperId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postTransferDomain(
+    domain: string,
+    body: ITransferDomainPurchase,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains/${domain}/transfer`;
     const headers =
       xShopperId !== undefined
         ? {
