@@ -112,6 +112,19 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getPurchaseSchema
+   * @description Get purchase schema
+   * @param tld - tld
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getPurchaseSchema(tld: string): Promise<IRes> {
+    const url = `${this.url}v1/domains/purchase/schema/${tld}`;
+    const r = await fetch(url, { headers: this.header });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
