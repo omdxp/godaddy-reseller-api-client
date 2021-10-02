@@ -93,7 +93,14 @@ class Client {
         this.postCustomerForwardConfigByFqdn.bind(this),
       customerDomainAcknowledge: this.postCustomerDomainAcknowledge.bind(this),
     },
-    delete: {},
+    delete: {
+      domain: this.deleteDomain.bind(this),
+      domainPrivacy: this.deleteDomainPrivacy.bind(this),
+      domainDnsRecords: this.deleteDomainDnsRecords.bind(this),
+      customerDomainByFqdn: this.deleteCustomerDomainByFqdn.bind(this),
+      customerRecentDomainAction:
+        this.deleteCustomerRecentDomainAction.bind(this),
+    },
     patch: {},
     put: {},
   };
@@ -110,7 +117,7 @@ class Client {
    * @description Get all domains
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getDomains(
+  private async getDomains(
     statuses: StatusType[],
     statusGroups: StatusGroupType[],
     limit: number,
@@ -819,7 +826,7 @@ class Client {
    * @param domain - domain
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async deleteDomain(domain: string): Promise<IRes> {
+  private async deleteDomain(domain: string): Promise<IRes> {
     const url = `${this.url}v1/domains/${domain}`;
     const r = await fetch(url, {
       method: "DELETE",
@@ -836,7 +843,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async deleteDomainPrivacy(
+  private async deleteDomainPrivacy(
     domain: string,
     xShopperId?: string,
   ): Promise<IRes> {
@@ -861,7 +868,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async deleteDomainDnsRecords(
+  private async deleteDomainDnsRecords(
     domain: string,
     type: DnsRecordType,
     name: string,
@@ -886,7 +893,7 @@ class Client {
    * @param fqdn - fqdn
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async deleteCustomerDomainByFqdn(
+  private async deleteCustomerDomainByFqdn(
     customerId: string,
     fqdn: string,
   ): Promise<IRes> {
@@ -908,7 +915,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async deleteCustomerRecentDomainAction(
+  private async deleteCustomerRecentDomainAction(
     customerId: string,
     domain: string,
     type: ActionType,
@@ -1186,5 +1193,3 @@ class Client {
   }
   //#endregion
 }
-
-
