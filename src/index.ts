@@ -106,7 +106,13 @@ class Client {
       domainContacts: this.patchDomainContacts.bind(this),
       domainRecords: this.patchDomainRecords.bind(this),
     },
-    put: {},
+    put: {
+      domainRecords: this.putDomainRecords.bind(this),
+      domainDnsRecords: this.putDomainDnsRecords.bind(this),
+      domainDnsRecordsByType: this.putDomainDnsRecordsByType.bind(this),
+      customerForwardInfoByFqdn: this.putCustomerForwardInfoByFqdn.bind(this),
+      customerDomainNotification: this.putCustomerDomainNotification.bind(this),
+    },
   };
 
   private header: Record<string, string> = {
@@ -1040,7 +1046,7 @@ class Client {
    * @param records - records
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async putDomainRecords(
+  private async putDomainRecords(
     domain: string,
     records: IRecord[],
     xShopperId?: string,
@@ -1076,7 +1082,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async putDomainDnsRecords(
+  private async putDomainDnsRecords(
     domain: string,
     type: DnsRecordType,
     name: string,
@@ -1113,7 +1119,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async putDomainDnsRecordsByType(
+  private async putDomainDnsRecordsByType(
     domain: string,
     type: DnsRecordType,
     records: IRecord[],
@@ -1148,7 +1154,7 @@ class Client {
    * @param body - body
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async putCustomerForwardInfoByFqdn(
+  private async putCustomerForwardInfoByFqdn(
     customerId: string,
     fqdn: string,
     body: IDomainForwardRule,
@@ -1171,7 +1177,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async putCustomerDomainNotification(
+  private async putCustomerDomainNotification(
     customerId: string,
     type: ActionType,
     xRequestId: string,
