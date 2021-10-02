@@ -101,7 +101,11 @@ class Client {
       customerRecentDomainAction:
         this.deleteCustomerRecentDomainAction.bind(this),
     },
-    patch: {},
+    patch: {
+      domain: this.patchDomain.bind(this),
+      domainContacts: this.patchDomainContacts.bind(this),
+      domainRecords: this.patchDomainRecords.bind(this),
+    },
     put: {},
   };
 
@@ -946,7 +950,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async patchDomain(
+  private async patchDomain(
     domain: string,
     body: IPatchDomain,
     xShopperId?: string,
@@ -980,7 +984,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async patchDomainContacts(
+  private async patchDomainContacts(
     domain: string,
     contacts: IContacts,
     xShopperId?: string,
@@ -1013,7 +1017,7 @@ class Client {
    * @param records - records
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async patchDomainRecords(
+  private async patchDomainRecords(
     domain: string,
     records: IRecord[],
   ): Promise<IRes> {
