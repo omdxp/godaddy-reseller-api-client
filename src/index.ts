@@ -127,6 +127,9 @@ class Client {
       shopper: this.postShopper.bind(this),
       shopperSubaccount: this.postShopperSubaccount.bind(this),
     },
+    delete: {
+      shopper: this.deleteShopper.bind(this),
+    },
   };
 
   private header: Record<string, string> = {
@@ -1055,7 +1058,7 @@ class Client {
    * @param auditClientIp - auditClientIp
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async deleteShopper(
+  private async deleteShopper(
     shopperId: string,
     auditClientIp: string,
   ): Promise<IRes> {
