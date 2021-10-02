@@ -130,6 +130,9 @@ class Client {
     delete: {
       shopper: this.deleteShopper.bind(this),
     },
+    put: {
+      shopperSubaccountPassword: this.putShopperSubaccountPassword.bind(this),
+    },
   };
 
   private header: Record<string, string> = {
@@ -1333,7 +1336,7 @@ class Client {
    * @param secret - secret
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async putShopperSubaccountPassword(
+  private async putShopperSubaccountPassword(
     shopperId: string,
     secret: { secret: string },
   ): Promise<IRes> {
