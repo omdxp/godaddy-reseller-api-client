@@ -1029,5 +1029,38 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method putCustomerDomainNotification
+   * @description Put customer domain notification
+   * @param customerId - customerId
+   * @param type - type
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async putCustomerDomainNotification(
+    customerId: string,
+    type: ActionType,
+    xRequestId: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/notifications/optIn?types=${type}`;
+    const headers =
+      xRequestId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Request-Id": `${xRequestId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "PUT",
+      headers: headers,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 }
