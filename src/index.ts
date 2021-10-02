@@ -19,6 +19,8 @@ import {
 } from "./interfaces/res";
 
 class Client {
+  private url: string = "https://api.ote-godaddy.com/";
+
   // constructor
   /**
    * @constructor Client
@@ -35,7 +37,7 @@ class Client {
     };
   }
 
-  // properties
+  //#region properties
   private _rccSandbox: string;
   public get rccSandbox(): string {
     return this._rccSandbox;
@@ -52,12 +54,38 @@ class Client {
     this._apiSecret = v;
   }
 
+  public domainsAPIs = {
+    get: {
+      domains: this.getDomains.bind(this),
+      agreements: this.getAgreements.bind(this),
+      available: this.getAvailable.bind(this),
+      purchaseSchema: this.getPurchaseSchema.bind(this),
+      suggestions: this.getSuggestions.bind(this),
+      tlds: this.getTlds.bind(this),
+      domain: this.getDomain.bind(this),
+      dnsRecords: this.getDnsRecords.bind(this),
+      customerDomain: this.getCustomerDomain.bind(this),
+      customerForwardInfoByFqdn: this.getCustomerForwardInfoByFqdn.bind(this),
+      customerDomainActions: this.getCustomerDomainActions.bind(this),
+      customerRecentDomainAction: this.getCustomerRecentDomainAction.bind(this),
+      customerNextDomainNotification:
+        this.getCustomerNextDomainNotification.bind(this),
+      customerDomainNotificationTypes:
+        this.getCustomerDomainNotificationTypes.bind(this),
+      customerDomainNotificationSchema:
+        this.getCustomerDomainNotificationSchema.bind(this),
+    },
+    post: {},
+    delete: {},
+    patch: {},
+    put: {},
+  };
+
   private header: Record<string, string> = {
     accept: "application/json",
     Authorization: "",
   };
-
-  private url: string = "https://api.ote-godaddy.com/";
+  //#endregion
 
   //#region get methods
   /**
@@ -81,7 +109,7 @@ class Client {
    * @param forTransfer - forTransfer
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getAgreements(
+  private async getAgreements(
     xMarketId: string = "en-US",
     tlds: string[],
     privacy: boolean,
@@ -114,7 +142,7 @@ class Client {
    * @param forTransfer - forTransfer
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getAvailable(
+  private async getAvailable(
     domain: string,
     checkType: CheckType = "FAST",
     forTransfer: boolean = true,
@@ -131,7 +159,7 @@ class Client {
    * @param tld - tld
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getPurchaseSchema(tld: string): Promise<IRes> {
+  private async getPurchaseSchema(tld: string): Promise<IRes> {
     const url = `${this.url}v1/domains/purchase/schema/${tld}`;
     const r = await fetch(url, { headers: this.header });
     const res = await r.json();
@@ -153,7 +181,7 @@ class Client {
    * @param waitMs - waitMs
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getSuggestions(
+  private async getSuggestions(
     xShopperId?: string,
     query?: string,
     country?: string,
@@ -183,7 +211,7 @@ class Client {
    * @description Get tlds
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getTlds(): Promise<IRes> {
+  private async getTlds(): Promise<IRes> {
     const url = `${this.url}v1/domains/tlds`;
     const r = await fetch(url, { headers: this.header });
     const res = await r.json();
@@ -196,7 +224,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getDomain(domain: string, xShopperId?: string): Promise<IRes> {
+  private async getDomain(domain: string, xShopperId?: string): Promise<IRes> {
     const url = `${this.url}v1/domains/${domain}`;
     const headers = xShopperId
       ? { ...this.header, "X-Shopper-Id": xShopperId }
@@ -217,7 +245,7 @@ class Client {
    * @param limit - limit
    * @returns
    */
-  public async getDnsRecords(
+  private async getDnsRecords(
     domain: string,
     type: DnsRecordType,
     name: string,
@@ -243,7 +271,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCustomerDomain(
+  private async getCustomerDomain(
     customerId: string,
     domain: string,
     includes: CustomerDomainQuery,
@@ -266,7 +294,7 @@ class Client {
    * @param includeSubs - includeSubs
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCustomerForwardInfoByFqdn(
+  private async getCustomerForwardInfoByFqdn(
     customerId: string,
     fqdn: string,
     includeSubs: boolean,
@@ -285,7 +313,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCustomerDomainActions(
+  private async getCustomerDomainActions(
     customerId: string,
     domain: string,
     xRequestId?: string,
@@ -307,7 +335,7 @@ class Client {
    * @param type - type
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCustomerRecentDomainAction(
+  private async getCustomerRecentDomainAction(
     customerId: string,
     domain: string,
     type: ActionType,
@@ -325,7 +353,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCustomerNextDomainNotification(
+  private async getCustomerNextDomainNotification(
     customerId: string,
     xRequestId?: string,
   ): Promise<IRes> {
@@ -345,7 +373,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCustomerDomainNotificationTypes(
+  private async getCustomerDomainNotificationTypes(
     customerId: string,
     xRequestId?: string,
   ): Promise<IRes> {
@@ -366,7 +394,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCustomerDomainNotificationSchema(
+  private async getCustomerDomainNotificationSchema(
     customerId: string,
     type: NotificationType,
     xRequestId?: string,
