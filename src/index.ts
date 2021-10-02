@@ -711,6 +711,39 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method postCustomerDomainAcknowledge
+   * @description Post customer domain acknowledge
+   * @param customerId - customerId
+   * @param notificatinId - notificationId
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCustomerDomainAcknowledge(
+    customerId: string,
+    notificationId: string,
+    xRequestId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/notifications/${notificationId}/acknowledge`;
+    const headers =
+      xRequestId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Request-Id": `${xRequestId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region delete methods
