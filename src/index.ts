@@ -15,7 +15,10 @@ import {
   ISchemaRes,
   ITransferDomainPurchase,
   NotificationType,
+  OptionalDetailType,
   Sources,
+  StatusGroupType,
+  StatusType,
 } from "./interfaces/res";
 
 class Client {
@@ -93,9 +96,30 @@ class Client {
    * @description Get all domains
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getDomains(): Promise<IRes> {
-    const url = `${this.url}v1/domains`;
-    const r = await fetch(url, { headers: this.header });
+  public async getDomains(
+    statuses: StatusType[],
+    statusGroups: StatusGroupType[],
+    limit: number,
+    marker: string,
+    includes: OptionalDetailType[],
+    modifiedDate: string,
+    xShopperId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/domains?statuses=${statuses?.join(
+      ",",
+    )}&statusGroups=${statusGroups?.join(
+      ",",
+    )}&limit=${limit}&marker=${marker}&includes=${includes?.join(
+      ",",
+    )}&modifiedDate=${modifiedDate}`;
+    const headers =
+      xShopperId !== undefined
+        ? {
+            ...this.header,
+            "X-Shopper-Id": `${xShopperId}`,
+          }
+        : this.header;
+    const r = await fetch(url, { method: "GET", headers });
     const res = await r.json();
     return { status: r.status, data: res };
   }
