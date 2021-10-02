@@ -118,6 +118,13 @@ class Client {
     },
   };
 
+  public shoppersAPIs = {
+    get: {
+      shopper: this.getShopper.bind(this),
+      shopperDetails: this.getShopperDetails.bind(this),
+    },
+  };
+
   private header: Record<string, string> = {
     accept: "application/json",
     Authorization: "",
@@ -473,7 +480,7 @@ class Client {
    * @param includes - includes
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getShopper(
+  private async getShopper(
     shopperId: string,
     includes: IncludeShopperType[] = [],
   ): Promise<IRes> {
@@ -496,7 +503,7 @@ class Client {
    * @param auditClientIp - auditClientIp
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getShopperDetails(
+  private async getShopperDetails(
     shopperId: string,
     auditClientIp: string,
   ): Promise<IRes> {
