@@ -436,3 +436,5 @@ export interface ISubaccount {
   nameLast: string;
   password: string;
 }
+
+export type IncludeShopperType = "customerId";

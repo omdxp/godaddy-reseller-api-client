@@ -8,6 +8,7 @@ import {
   ICustomerRedeemDomain,
   IDomainForwardRule,
   IDomainsContactsValidation,
+  IncludeShopperType,
   IPatchDomain,
   IPrivacyPurchaseOptions,
   IRecord,
@@ -460,6 +461,29 @@ class Client {
       ? { ...this.header, "X-Request-Id": `${xRequestId}` }
       : this.header;
     const r = await fetch(url, { method: "GET", headers });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method getShopper
+   * @description Get shopper
+   * @param shopperId - shopperId
+   * @param includes - includes
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getShopper(
+    shopperId: string,
+    includes: IncludeShopperType[] = [],
+  ): Promise<IRes> {
+    const url =
+      includes?.length > 0
+        ? `${this.url}v1/shoppers/${shopperId}`
+        : `${this.url}v1/shoppers/${shopperId}?includes=${includes.join(",")}`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
     const res = await r.json();
     return { status: r.status, data: res };
   }
