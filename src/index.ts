@@ -14,6 +14,7 @@ import {
   IRecord,
   IRes,
   ISchemaRes,
+  IShopper,
   ISubaccount,
   ITransferDomainPurchase,
   NotificationType,
@@ -868,6 +869,30 @@ class Client {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(subaccount),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postShopper
+   * @description Post shopper
+   * @param shopperId - shopperId
+   * @param shopper - shopper
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postShopper(
+    shopperId: string,
+    shopper: IShopper,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/shoppers/${shopperId}`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: {
+        ...this.header,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(shopper),
     });
     const res = await r.json();
     return { status: r.status, data: res };

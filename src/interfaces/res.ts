@@ -438,3 +438,11 @@ export interface ISubaccount {
 }
 
 export type IncludeShopperType = "customerId";
+
+export interface IShopper {
+  email: string;
+  externalId: number;
+  markedId: string;
+  nameFirst: string;
+  nameLast: string;
+}
