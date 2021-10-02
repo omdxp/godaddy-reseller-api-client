@@ -78,7 +78,21 @@ class Client {
       customerDomainNotificationSchema:
         this.getCustomerDomainNotificationSchema.bind(this),
     },
-    post: {},
+    post: {
+      available: this.postAvailable.bind(this),
+      contactsValidate: this.postContactsValidate.bind(this),
+      purchase: this.postPurchase.bind(this),
+      purchaseValidate: this.postPurchaseValidate.bind(this),
+      privacyPurchase: this.postPrivacyPurchase.bind(this),
+      renewDomain: this.postRenewDomain.bind(this),
+      transferDomain: this.postTransferDomain.bind(this),
+      resendVerificationEmail: this.postResendVerificationEmail.bind(this),
+      customerRedeem: this.postCustomerRedeem.bind(this),
+      customerTransferOut: this.postCustomerTransferOut.bind(this),
+      customerForwardConfigByFqdn:
+        this.postCustomerForwardConfigByFqdn.bind(this),
+      customerDomainAcknowledge: this.postCustomerDomainAcknowledge.bind(this),
+    },
     delete: {},
     patch: {},
     put: {},
@@ -441,7 +455,7 @@ class Client {
    * @param checkType - checkType
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postAvailable(
+  private async postAvailable(
     domains: string[],
     checkType: CheckType = "FAST",
   ): Promise<IRes> {
@@ -463,7 +477,7 @@ class Client {
    * @param marketId - marketId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postContactsValidate(
+  private async postContactsValidate(
     body: IDomainsContactsValidation,
     xPrivateLabelId?: number,
     marketId: string = "",
@@ -495,7 +509,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postPurchase(
+  private async postPurchase(
     body: ISchemaRes,
     xShopperId?: string,
   ): Promise<IRes> {
@@ -526,7 +540,7 @@ class Client {
    * @param body - body
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postPurchaseValidate(body: ISchemaRes): Promise<IRes> {
+  private async postPurchaseValidate(body: ISchemaRes): Promise<IRes> {
     const url = `${this.url}v1/domains/purchase/validate`;
     const headers = { ...this.header, "Content-Type": "application/json" };
     const r = await fetch(url, {
@@ -546,7 +560,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postPrivacyPurchase(
+  private async postPrivacyPurchase(
     domain: string,
     body: IPrivacyPurchaseOptions,
     xShopperId?: string,
@@ -580,7 +594,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postRenewDomain(
+  private async postRenewDomain(
     domain: string,
     body: {
       period: number;
@@ -616,7 +630,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postTransferDomain(
+  private async postTransferDomain(
     domain: string,
     body: ITransferDomainPurchase,
     xShopperId?: string,
@@ -649,7 +663,7 @@ class Client {
    * @param xShopperId - xShopperId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postResendVerificationEmail(
+  private async postResendVerificationEmail(
     domain: string,
     xShopperId?: string,
   ): Promise<IRes> {
@@ -681,7 +695,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCustomerRedeem(
+  private async postCustomerRedeem(
     customerId: string,
     domain: string,
     body: ICustomerRedeemDomain,
@@ -717,7 +731,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCustomerTransferOut(
+  private async postCustomerTransferOut(
     customerId: string,
     domain: string,
     registrar: string,
@@ -749,7 +763,7 @@ class Client {
    * @param body - body
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCustomerForwardConfigByFqdn(
+  private async postCustomerForwardConfigByFqdn(
     customerId: string,
     fqdn: string,
     body: IDomainForwardRule,
@@ -772,7 +786,7 @@ class Client {
    * @param xRequestId - xRequestId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCustomerDomainAcknowledge(
+  private async postCustomerDomainAcknowledge(
     customerId: string,
     notificationId: string,
     xRequestId?: string,
@@ -1172,3 +1186,5 @@ class Client {
   }
   //#endregion
 }
+
+
