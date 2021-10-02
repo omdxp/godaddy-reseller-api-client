@@ -1311,5 +1311,29 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method putShopperSubaccountPassword
+   * @description Put shopper subaccount password
+   * @param shopperId - shopperId
+   * @param secret - secret
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async putShopperSubaccountPassword(
+    shopperId: string,
+    secret: { secret: string },
+  ): Promise<IRes> {
+    const url = `${this.url}v1/shoppers/${shopperId}/factors/password`;
+    const r = await fetch(url, {
+      method: "PUT",
+      headers: {
+        ...this.header,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(secret),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 }
