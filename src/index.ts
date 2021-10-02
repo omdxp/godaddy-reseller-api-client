@@ -1016,6 +1016,26 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method deleteShopper
+   * @description Delete shopper
+   * @param shopperId - shopperId
+   * @param auditClientIp - auditClientIp
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async deleteShopper(
+    shopperId: string,
+    auditClientIp: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/shoppers/${shopperId}?auditClientIp=${auditClientIp}`;
+    const r = await fetch(url, {
+      method: "DELETE",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region patch methods
