@@ -14,6 +14,7 @@ import {
   IRes,
   ISchemaRes,
   ITransferDomainPurchase,
+  NotificationType,
   Sources,
 } from "./interfaces/res";
 
@@ -349,6 +350,28 @@ class Client {
     xRequestId?: string,
   ): Promise<IRes> {
     const url = `${this.url}v2/customers/${customerId}/domains/notifications/optIn`;
+    const headers = xRequestId
+      ? { ...this.header, "X-Request-Id": `${xRequestId}` }
+      : this.header;
+    const r = await fetch(url, { method: "GET", headers });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method getCustomerDomainNotificationSchema
+   * @description Get customer domain notification schema for the specified notification type
+   * @param customerId - customerId
+   * @param type - type
+   * @param xRequestId - xRequestId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCustomerDomainNotificationSchema(
+    customerId: string,
+    type: NotificationType,
+    xRequestId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/domains/notifications/schemas/${type}`;
     const headers = xRequestId
       ? { ...this.header, "X-Request-Id": `${xRequestId}` }
       : this.header;

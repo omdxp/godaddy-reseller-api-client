@@ -177,3 +177,16 @@ export type ActionType =
   | "TRANSFER_OUT_REJECT"
   | "TRANSFER_OUT_REQUESTED"
   | "TRANSIT";
+
+export type NotificationType =
+  | "AUTO_RENEWAL"
+  | "BACKORDER"
+  | "BACKORDER_PURCHASE"
+  | "EXPIRY"
+  | "PREMIUM"
+  | "PRIVACY_PURCHASE"
+  | "REDEEM"
+  | "REGISTER"
+  | "RENEW"
+  | "TRADE"
+  | "TRANSFER";
