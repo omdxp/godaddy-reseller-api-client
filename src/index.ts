@@ -13,6 +13,7 @@ import {
   IRecord,
   IRes,
   ISchemaRes,
+  ISubaccount,
   ITransferDomainPurchase,
   NotificationType,
   OptionalDetailType,
@@ -823,6 +824,26 @@ class Client {
     const r = await fetch(url, {
       method: "POST",
       headers,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postShopperSubaccount
+   * @description Post shopper subaccount
+   * @param subaccount - subaccount
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postShopperSubaccount(subaccount: ISubaccount): Promise<IRes> {
+    const url = `${this.url}v1/shoppers/subaccount`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: {
+        ...this.header,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(subaccount),
     });
     const res = await r.json();
     return { status: r.status, data: res };

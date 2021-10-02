@@ -427,3 +427,12 @@ export type StatusGroupType =
   | "VISIBLE";
 
 export type OptionalDetailType = "authCode" | "contacts" | "nameServers";
+
+export interface ISubaccount {
+  email: string;
+  externalId: number;
+  markedId: string;
+  nameFirst: string;
+  nameLast: string;
+  password: string;
+}
