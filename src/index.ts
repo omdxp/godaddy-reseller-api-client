@@ -123,6 +123,10 @@ class Client {
       shopper: this.getShopper.bind(this),
       shopperDetails: this.getShopperDetails.bind(this),
     },
+    post: {
+      shopper: this.postShopper.bind(this),
+      shopperSubaccount: this.postShopperSubaccount.bind(this),
+    },
   };
 
   private header: Record<string, string> = {
@@ -887,7 +891,7 @@ class Client {
    * @param subaccount - subaccount
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postShopperSubaccount(subaccount: ISubaccount): Promise<IRes> {
+  private async postShopperSubaccount(subaccount: ISubaccount): Promise<IRes> {
     const url = `${this.url}v1/shoppers/subaccount`;
     const r = await fetch(url, {
       method: "POST",
@@ -908,7 +912,7 @@ class Client {
    * @param shopper - shopper
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postShopper(
+  private async postShopper(
     shopperId: string,
     shopper: IShopper,
   ): Promise<IRes> {
