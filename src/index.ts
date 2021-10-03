@@ -171,7 +171,9 @@ class Client {
     delete: {
       certificateCallback: this.deleteCertificateCallback.bind(this),
     },
-    put: {},
+    put: {
+      certificateCallback: this.putCertificateCallback.bind(this),
+    },
   };
 
   private header: Record<string, string> = {
@@ -1845,7 +1847,7 @@ class Client {
    * @param callbackUrl - callbackUrl
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async putCertificateCallback(
+  private async putCertificateCallback(
     certificateId: string,
     callbackUrl: string,
   ): Promise<IRes> {
