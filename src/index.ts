@@ -558,6 +558,7 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
   //#endregion
 
   //#region post methods
@@ -1032,6 +1033,25 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method postCertificateResendEmail
+   * @description Post certificate resend email
+   * @param certificateId - certificateId
+   * @param emailId - emailId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCertificateResendEmail(
+    certificateId: string,
+    emailId: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/email/${emailId}/resend`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region delete methods
