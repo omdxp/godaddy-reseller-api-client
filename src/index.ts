@@ -156,7 +156,18 @@ class Client {
         this.getCertificateExternalAccountBindingForCustomer.bind(this),
       siteSeal: this.getCertificateSiteSeal.bind(this),
     },
-    post: {},
+    post: {
+      certificate: this.postCertificate.bind(this),
+      alternateEmail: this.postCertificateAlternateEmail.bind(this),
+      cancel: this.postCertificateCancel.bind(this),
+      checkDomainControl: this.postCertificateCheckDomainControl.bind(this),
+      reissue: this.postCertificateReissue.bind(this),
+      renew: this.postCertificateRenew.bind(this),
+      resendEmail: this.postCertificateResendEmail.bind(this),
+      resendEmailToEmail: this.postCertificateResendEmailToEmail.bind(this),
+      revoke: this.postCertificateRevoke.bind(this),
+      validateCertificate: this.postValidateCertificate.bind(this),
+    },
     delete: {},
     put: {},
   };
@@ -1174,7 +1185,7 @@ class Client {
    * @param xMarketId - xMarketId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificate(
+  private async postCertificate(
     certificateCreate: ICertificateCreate,
     xMarketId?: string,
   ): Promise<IRes> {
@@ -1206,7 +1217,7 @@ class Client {
    * @param xMarketId - xMarketId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postValidateCertificate(
+  private async postValidateCertificate(
     certificateCreate: ICertificateCreate,
     xMarketId?: string,
   ): Promise<IRes> {
@@ -1238,7 +1249,7 @@ class Client {
    * @param emailId - emailId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificateResendEmail(
+  private async postCertificateResendEmail(
     certificateId: string,
     emailId: string,
   ): Promise<IRes> {
@@ -1258,7 +1269,7 @@ class Client {
    * @param emailAddress - emailAddress
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificateAlternateEmail(
+  private async postCertificateAlternateEmail(
     certificateId: string,
     emailAddress: string,
   ): Promise<IRes> {
@@ -1279,7 +1290,7 @@ class Client {
    * @param emailAddress - emailAddress
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificateResendEmailToEmail(
+  private async postCertificateResendEmailToEmail(
     certificateId: string,
     emailId: string,
     emailAddress: string,
@@ -1299,7 +1310,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificateCancel(certificateId: string): Promise<IRes> {
+  private async postCertificateCancel(certificateId: string): Promise<IRes> {
     const url = `${this.url}v1/certificates/${certificateId}/cancel`;
     const r = await fetch(url, {
       method: "POST",
@@ -1316,7 +1327,7 @@ class Client {
    * @param reissueCreate - reissueCreate
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificateReissue(
+  private async postCertificateReissue(
     certificateId: string,
     reissueCreate: IReissueCertificate,
   ): Promise<IRes> {
@@ -1337,7 +1348,7 @@ class Client {
    * @param renewCreate - renewCreate
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificateRenew(
+  private async postCertificateRenew(
     certificateId: string,
     renewCreate: IRenewCertificate,
   ): Promise<IRes> {
@@ -1358,7 +1369,7 @@ class Client {
    * @param certificateRevoke - certificateRevoke
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificateRevoke(
+  private async postCertificateRevoke(
     certificateId: string,
     certificateRevoke: { reason: string },
   ): Promise<IRes> {
@@ -1378,7 +1389,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async postCertificateCheckDomainControl(
+  private async postCertificateCheckDomainControl(
     certificateId: string,
   ): Promise<IRes> {
     const url = `${this.url}v1/certificates/${certificateId}/verifyDomainControl`;
