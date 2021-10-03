@@ -967,6 +967,38 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method postValidateCertificate
+   * @description Post validate certificate
+   * @param certificateCreate - certificateCreate
+   * @param xMarketId - xMarketId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postValidateCertificate(
+    certificateCreate: ICertificateCreate,
+    xMarketId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/validate`;
+    const headers =
+      xMarketId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Market-Id": `${xMarketId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(certificateCreate),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region delete methods
