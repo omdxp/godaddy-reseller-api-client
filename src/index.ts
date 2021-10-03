@@ -168,7 +168,9 @@ class Client {
       revoke: this.postCertificateRevoke.bind(this),
       validateCertificate: this.postValidateCertificate.bind(this),
     },
-    delete: {},
+    delete: {
+      certificateCallback: this.deleteCertificateCallback.bind(this),
+    },
     put: {},
   };
 
@@ -1545,7 +1547,9 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async deleteCertificateCallback(certificateId: string): Promise<IRes> {
+  private async deleteCertificateCallback(
+    certificateId: string,
+  ): Promise<IRes> {
     const url = `${this.url}v1/certificates/${certificateId}/callback`;
     const r = await fetch(url, {
       method: "DELETE",
