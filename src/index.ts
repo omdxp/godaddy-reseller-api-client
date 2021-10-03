@@ -577,6 +577,22 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method getCertificateCallback
+   * @description Get certificate callback
+   * @param certificateId - certificateId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCertificateCallback(certificateId: string): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/callback`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
   //#endregion
 
   //#region post methods
