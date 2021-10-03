@@ -1072,6 +1072,28 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method postCertificateResendEmailToEmail
+   * @description Post certificate resend email to email
+   * @param certificateId - certificateId
+   * @param emailId - emailId
+   * @param emailAddress - emailAddress
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCertificateResendEmailToEmail(
+    certificateId: string,
+    emailId: string,
+    emailAddress: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/email/${emailId}/resend/${emailAddress}`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region delete methods
