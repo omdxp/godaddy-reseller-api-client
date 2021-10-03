@@ -633,6 +633,27 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method getCertificateCustomerCertificates
+   * @description Get certificate customer certificates
+   * @param customerId - customerId
+   * @param offset - offset
+   * @param limit - limit
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCertificateCustomerCertificates(
+    customerId: string,
+    offset: number,
+    limit: number,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/certificates?offset=${offset}&limit=${limit}`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
