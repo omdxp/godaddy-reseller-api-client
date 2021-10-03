@@ -526,6 +526,22 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getCertificate
+   * @description Get certificate
+   * @param certificateId - certificateId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCertificate(certificateId: string): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
@@ -999,6 +1015,7 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
   //#endregion
 
   //#region delete methods
