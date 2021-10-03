@@ -493,3 +493,12 @@ export interface IReissueCertificate {
   rootType: string;
   subjectAlternativeNames: string[];
 }
+
+export interface IRenewCertificate {
+  callbackUrl: string;
+  commonName: string;
+  csr: string;
+  period: number;
+  rootType: string;
+  subjectAlternativeNames: string[];
+}

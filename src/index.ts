@@ -14,6 +14,7 @@ import {
   IPrivacyPurchaseOptions,
   IRecord,
   IReissueCertificate,
+  IRenewCertificate,
   IRes,
   ISchemaRes,
   IShopper,
@@ -1177,6 +1178,27 @@ class Client {
       method: "POST",
       headers: { ...this.header, "Content-Type": "application/json" },
       body: JSON.stringify(reissueCreate),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postCertificateRenew
+   * @description Post certificate renew
+   * @param certificateId - certificateId
+   * @param renewCreate - renewCreate
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCertificateRenew(
+    certificateId: string,
+    renewCreate: IRenewCertificate,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/renew`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { ...this.header, "Content-Type": "application/json" },
+      body: JSON.stringify(renewCreate),
     });
     const res = await r.json();
     return { status: r.status, data: res };
