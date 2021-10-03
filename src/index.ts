@@ -13,6 +13,7 @@ import {
   IPatchDomain,
   IPrivacyPurchaseOptions,
   IRecord,
+  IReissueCertificate,
   IRes,
   ISchemaRes,
   IShopper,
@@ -1155,6 +1156,27 @@ class Client {
     const r = await fetch(url, {
       method: "POST",
       headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postCertificateReissue
+   * @description Post certificate reissue
+   * @param certificateId - certificateId
+   * @param reissueCreate - reissueCreate
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCertificateReissue(
+    certificateId: string,
+    reissueCreate: IReissueCertificate,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/reissue`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { ...this.header, "Content-Type": "application/json" },
+      body: JSON.stringify(reissueCreate),
     });
     const res = await r.json();
     return { status: r.status, data: res };

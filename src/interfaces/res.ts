@@ -484,3 +484,12 @@ export interface ICertificateCreate {
   slotSize: string;
   subjectAlternativeNames: string[];
 }
+
+export interface IReissueCertificate {
+  callbackUrl: string;
+  commonName: string;
+  csr: string;
+  delayExistingRevoke: number;
+  rootType: string;
+  subjectAlternativeNames: string[];
+}
