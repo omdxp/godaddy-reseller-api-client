@@ -798,6 +798,30 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getCountry
+   * @description Get country
+   * @param countryKey - countryKey
+   * @param marketId - marketId
+   * @param fate - fate
+   * @param order - order
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCountry(
+    countryKey: string,
+    marketId: string,
+    fate: "key" | "label",
+    order: "ascending" | "descending",
+  ): Promise<IRes> {
+    const url = `${this.url}v1/countries/${countryKey}?marketId=${marketId}&sort=${fate}&order=${order}`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
