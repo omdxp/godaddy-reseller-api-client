@@ -632,6 +632,7 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
   //#endregion
 
   //#region post methods
@@ -1242,6 +1243,24 @@ class Client {
       method: "POST",
       headers: { ...this.header, "Content-Type": "application/json" },
       body: JSON.stringify(certificateRevoke),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postCertificateCheckDomainControl
+   * @description Post certificate check domain control
+   * @param certificateId - certificateId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCertificateCheckDomainControl(
+    certificateId: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/verifyDomainControl`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: this.header,
     });
     const res = await r.json();
     return { status: r.status, data: res };
