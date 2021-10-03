@@ -559,6 +559,24 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method getCertificateEmailHistory
+   * @description Get certificate email history
+   * @param certificateId - certificateId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCertificateEmailHistory(
+    certificateId: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/email/history`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
   //#endregion
 
   //#region post methods
