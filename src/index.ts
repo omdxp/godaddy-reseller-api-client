@@ -1203,6 +1203,27 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method postCertificateRevoke
+   * @description Post certificate revoke
+   * @param certificateId - certificateId
+   * @param certificateRevoke - certificateRevoke
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCertificateRevoke(
+    certificateId: string,
+    certificateRevoke: { reason: string },
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/revoke`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { ...this.header, "Content-Type": "application/json" },
+      body: JSON.stringify(certificateRevoke),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region delete methods
