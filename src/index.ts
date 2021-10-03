@@ -593,6 +593,21 @@ class Client {
     return { status: r.status, data: res };
   }
 
+  /**
+   * @method getCertificateDownload
+   * @description Get certificate download
+   * @param certificateId - certificateId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCertificateDownload(certificateId: string): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/download`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
