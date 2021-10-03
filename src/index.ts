@@ -176,6 +176,13 @@ class Client {
     },
   };
 
+  public countriyAPI = {
+    get: {
+      countries: this.getCountries.bind(this),
+      country: this.getCountry.bind(this),
+    },
+  };
+
   private header: Record<string, string> = {
     accept: "application/json",
     Authorization: "",
@@ -783,7 +790,7 @@ class Client {
    * @param order - order
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCountries(
+  private async getCountries(
     marketId: string,
     regionTypeId: number,
     regionName: string,
@@ -808,7 +815,7 @@ class Client {
    * @param order - order
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCountry(
+  private async getCountry(
     countryKey: string,
     marketId: string,
     fate: "key" | "label",
