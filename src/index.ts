@@ -138,6 +138,29 @@ class Client {
     },
   };
 
+  public certificatesAPI = {
+    get: {
+      certificate: this.getCertificate.bind(this),
+      certificateActions: this.getCertificateActions.bind(this),
+      certificateCallback: this.getCertificateCallback.bind(this),
+      customerCertificateDetails:
+        this.getCertificateCustomerCertificateDetails.bind(this),
+      customerCertificates: this.getCertificateCustomerCertificates.bind(this),
+      detailedInfoForSuppliedDomain:
+        this.getCertificateDetailedInfoForSuppliedDomain.bind(this),
+      domainVerificationStatus:
+        this.getCertificateDomainVerificationStatus.bind(this),
+      download: this.getCertificateDownload.bind(this),
+      emailHistory: this.getCertificateEmailHistory.bind(this),
+      externalAccountBindingForCustomer:
+        this.getCertificateExternalAccountBindingForCustomer.bind(this),
+      siteSeal: this.getCertificateSiteSeal.bind(this),
+    },
+    post: {},
+    delete: {},
+    put: {},
+  };
+
   private header: Record<string, string> = {
     accept: "application/json",
     Authorization: "",
@@ -535,7 +558,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificate(certificateId: string): Promise<IRes> {
+  private async getCertificate(certificateId: string): Promise<IRes> {
     const url = `${this.url}v1/certificates/${certificateId}`;
     const r = await fetch(url, {
       method: "GET",
@@ -551,7 +574,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateActions(certificateId: string): Promise<IRes> {
+  private async getCertificateActions(certificateId: string): Promise<IRes> {
     const url = `${this.url}v1/certificates/${certificateId}/actions`;
     const r = await fetch(url, {
       method: "GET",
@@ -567,7 +590,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateEmailHistory(
+  private async getCertificateEmailHistory(
     certificateId: string,
   ): Promise<IRes> {
     const url = `${this.url}v1/certificates/${certificateId}/email/history`;
@@ -585,7 +608,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateCallback(certificateId: string): Promise<IRes> {
+  private async getCertificateCallback(certificateId: string): Promise<IRes> {
     const url = `${this.url}v1/certificates/${certificateId}/callback`;
     const r = await fetch(url, {
       method: "GET",
@@ -601,7 +624,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateDownload(certificateId: string): Promise<IRes> {
+  private async getCertificateDownload(certificateId: string): Promise<IRes> {
     const url = `${this.url}v1/certificates/${certificateId}/download`;
     const r = await fetch(url, {
       method: "GET",
@@ -619,7 +642,7 @@ class Client {
    * @param local - local
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateSiteSeal(
+  private async getCertificateSiteSeal(
     certificateId: string,
     theme: "LIGHT" | "DARK",
     local: string,
@@ -641,7 +664,7 @@ class Client {
    * @param limit - limit
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateCustomerCertificates(
+  private async getCertificateCustomerCertificates(
     customerId: string,
     offset: number,
     limit: number,
@@ -662,7 +685,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateCustomerCertificateDetails(
+  private async getCertificateCustomerCertificateDetails(
     customerId: string,
     certificateId: string,
   ): Promise<IRes> {
@@ -682,7 +705,7 @@ class Client {
    * @param certificateId - certificateId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateDomainVerificationStatus(
+  private async getCertificateDomainVerificationStatus(
     customerId: string,
     certificateId: string,
   ): Promise<IRes> {
@@ -703,7 +726,7 @@ class Client {
    * @param domain - domain
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateDetailedInfoForSuppliedDomain(
+  private async getCertificateDetailedInfoForSuppliedDomain(
     customerId: string,
     certificateId: string,
     domain: string,
@@ -723,7 +746,7 @@ class Client {
    * @param customerId - customerId
    * @returns {Promise<IRes>} - Promise with response
    */
-  public async getCertificateExternalAccountBindingForCustomer(
+  private async getCertificateExternalAccountBindingForCustomer(
     customerId: string,
   ): Promise<IRes> {
     const url = `${this.url}v2/customers/${customerId}/certificates/acme/externalAccountBinding`;
