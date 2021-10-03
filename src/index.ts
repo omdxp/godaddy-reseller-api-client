@@ -4,6 +4,7 @@ import {
   CheckType,
   CustomerDomainQuery,
   DnsRecordType,
+  ICertificateCreate,
   IContacts,
   ICustomerRedeemDomain,
   IDomainForwardRule,
@@ -930,6 +931,38 @@ class Client {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(shopper),
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
+
+  /**
+   * @method postCertificate
+   * @description Post certificate
+   * @param certificateCreate - certificateCreate
+   * @param xMarketId - xMarketId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCertificate(
+    certificateCreate: ICertificateCreate,
+    xMarketId?: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates`;
+    const headers =
+      xMarketId !== undefined
+        ? {
+            ...this.header,
+            "Content-Type": "application/json",
+            "X-Market-Id": `${xMarketId}`,
+          }
+        : {
+            ...this.header,
+            "Content-Type": "application/json",
+          };
+    const r = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(certificateCreate),
     });
     const res = await r.json();
     return { status: r.status, data: res };

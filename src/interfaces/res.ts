@@ -446,3 +446,41 @@ export interface IShopper {
   nameFirst: string;
   nameLast: string;
 }
+
+interface IAddress {
+  address1: string;
+  address2: string;
+  city: string;
+  country: string;
+  postalCode: string;
+  state: string;
+}
+
+export interface ICertificateCreate {
+  callbackUrl: string;
+  commonName: string;
+  contact: {
+    email: string;
+    jobTitle: string;
+    nameFirst: string;
+    nameLast: string;
+    nameMiddle: string;
+    phone: string;
+    suffix: string;
+  };
+  csr: string;
+  intelVPro: boolean;
+  organization: {
+    address: IAddress;
+    assumedName: string;
+    name: string;
+    phone: string;
+    registrationAgent: string;
+    registrationNumber: string;
+  };
+  period: number;
+  productType: string;
+  rootType: string;
+  slotSize: string;
+  subjectAlternativeNames: string[];
+}
