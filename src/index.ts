@@ -654,6 +654,26 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getCertificateCustomerCertificateDetails
+   * @description Get certificate customer certificate details
+   * @param customerId - customerId
+   * @param certificateId - certificateId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCertificateCustomerCertificateDetails(
+    customerId: string,
+    certificateId: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v2/customers/${customerId}/certificates/${certificateId}`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
