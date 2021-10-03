@@ -1128,6 +1128,22 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method postCertificateCancel
+   * @description Post certificate cancel
+   * @param certificateId - certificateId
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async postCertificateCancel(certificateId: string): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/cancel`;
+    const r = await fetch(url, {
+      method: "POST",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region delete methods
