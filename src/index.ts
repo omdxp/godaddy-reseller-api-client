@@ -610,6 +610,28 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method getCertificateSiteSeal
+   * @description Get certificate site seal
+   * @param certificateId - certificateId
+   * @param theme - theme
+   * @param local - local
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async getCertificateSiteSeal(
+    certificateId: string,
+    theme: "LIGHT" | "DARK",
+    local: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/siteSeal?theme=${theme}&local=${local}`;
+    const r = await fetch(url, {
+      method: "GET",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 
   //#region post methods
