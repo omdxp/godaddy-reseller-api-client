@@ -27,7 +27,7 @@ import {
   StatusType,
 } from "./interfaces/res";
 
-class Client {
+export default class Client {
   private url: string = "https://api.ote-godaddy.com/";
 
   // constructor
