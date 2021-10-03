@@ -1561,5 +1561,25 @@ class Client {
     const res = await r.json();
     return { status: r.status, data: res };
   }
+
+  /**
+   * @method putCertificateCallback
+   * @description Put certificate callback
+   * @param certificateId - certificateId
+   * @param callbackUrl - callbackUrl
+   * @returns {Promise<IRes>} - Promise with response
+   */
+  public async putCertificateCallback(
+    certificateId: string,
+    callbackUrl: string,
+  ): Promise<IRes> {
+    const url = `${this.url}v1/certificates/${certificateId}/callback?callbackUrl=${callbackUrl}`;
+    const r = await fetch(url, {
+      method: "PUT",
+      headers: this.header,
+    });
+    const res = await r.json();
+    return { status: r.status, data: res };
+  }
   //#endregion
 }
