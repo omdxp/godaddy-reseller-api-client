@@ -195,6 +195,13 @@ export default class Client {
   /**
    * @method getDomains
    * @description Get all domains
+   * @param statuses - Array of statuses
+   * @param statusGroups - Array of status groups
+   * @param limit - Number of domains to return
+   * @param marker - Marker to start from
+   * @param includes - Array of includes
+   * @param modifiedDate - Date to filter by
+   * @param xShopperId - Shopper ID
    * @returns {Promise<IRes>} - Promise with response
    */
   private async getDomains(
@@ -228,10 +235,10 @@ export default class Client {
   /**
    * @method getAgreements
    * @description Get all agreements
-   * @param xMarketId - xMarketId
-   * @param tlds - tlds
-   * @param privacy - privacy
-   * @param forTransfer - forTransfer
+   * @param xMarketId - Market ID
+   * @param tlds - Array of TLDs
+   * @param privacy - Privacy
+   * @param forTransfer - For transfer
    * @returns {Promise<IRes>} - Promise with response
    */
   private async getAgreements(
