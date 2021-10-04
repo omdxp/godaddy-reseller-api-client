@@ -202,6 +202,162 @@ It receives the following arguments:
 
 # Post
 
+## Post certificate
+
+To post certificate simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.certificate(
+  certificateCreate,
+  xMarketId?
+);
+```
+
+It receives the following arguments:
+
+- `certificateCreate` - The certificate to create.
+- `xMarketId?` - The id of the x-market to create the certificate for.
+
+## Post alternate email
+
+To post alternate email simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.alternateEmail(
+  certificateId,
+  emailAddress,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to post alternate email for.
+- `emailAddress` - The email address to post as alternate email.
+
+## Post cancel
+
+To post cancel simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.cancel(certificateId);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to cancel.
+
+## Post check domain control
+
+To post check domain control simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.checkDomainControl(
+  certificateId,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to check domain control for.
+
+## Post reissue
+
+To post reissue simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.reissue(
+  certificateId,
+  reissueCreate,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to reissue.
+- `reissueCreate` - The reissue to create.
+
+## Post renew
+
+To post renew simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.renew(
+  certificateId,
+  renewCreate,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to renew.
+- `renewCreate` - The renew to create.
+
+## Post resend email
+
+To post resend email simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.resendEmail(
+  certificateId,
+  emailId,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to resend email for.
+- `emailId` - The id of the email to resend.
+
+## Post resend email to email
+
+To post resend email to email simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.resendEmailToEmail(
+  certificateId,
+  emailId,
+  emailAddress,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to resend email to email for.
+- `emailId` - The id of the email to resend.
+- `emailAddress` - The email address to resend email to.
+
+## Post revoke
+
+To post revoke simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.revoke(
+  certificateId,
+  certificateRevoke,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to revoke.
+- `certificateRevoke` - The certificate revoke to create.
+
+## Post validate certificate
+
+To post validate certificate simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.post.validateCertificate(
+  certificateCreate,
+  xMarketId?
+);
+```
+
+It receives the following arguments:
+
+- `certificateCreate` - The certificate to create.
+- `xMarketId` - The id of the x-market to create the certificate for.
+
 # Delete
 
 # Put
