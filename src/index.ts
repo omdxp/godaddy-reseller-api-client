@@ -1,15 +1,10 @@
 import fetch from "node-fetch";
 import {
-  ActionType,
-  CheckType,
-  CustomerDomainQuery,
-  DnsRecordType,
   ICertificateCreate,
   IContacts,
   ICustomerRedeemDomain,
   IDomainForwardRule,
   IDomainsContactsValidation,
-  IncludeShopperType,
   IPatchDomain,
   IPrivacyPurchaseOptions,
   IRecord,
@@ -20,12 +15,19 @@ import {
   IShopper,
   ISubaccount,
   ITransferDomainPurchase,
+} from "./interfaces";
+import {
   NotificationType,
   OptionalDetailType,
   Sources,
   StatusGroupType,
   StatusType,
-} from "./interfaces/res";
+  IncludeShopperType,
+  ActionType,
+  CheckType,
+  CustomerDomainQuery,
+  DnsRecordType,
+} from "./types";
 
 export default class Client {
   private url: string = "https://api.ote-godaddy.com/";
