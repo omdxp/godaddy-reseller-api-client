@@ -42,11 +42,11 @@ There are many APIs that can be used to manage domains. The following APIs are a
   - [Domain contacts](#patch-domain-contacts)
   - [Domain records](#-patch-domain-records)
 - [Put](#put)
-  - [Domain records](#patch-domain-records)
-  - [Domain dns records](#patch-domain-dns-records)
-  - [Domain dns records by type](#patch-domain-dns-record-by-type)
-  - [Customer forward info by Fqdn](#patch-customer-forward-info-by-fqdn)
-  - [Customer domain notification](#patch-customer-domain-notification)
+  - [Domain records](#put-domain-records)
+  - [Domain dns records](#put-domain-dns-records)
+  - [Domain dns records by type](#put-domain-dns-record-by-type)
+  - [Customer forward info by Fqdn](#put-customer-forward-info-by-fqdn)
+  - [Customer domain notification](#put-customer-domain-notification)
 
 Considering that you already have instanciate the `Client` object as shown [here](./INSTANCIATE_CLIENT_CLASS.md).
 
@@ -666,3 +666,96 @@ It receives the following arguments:
 
 - `domain` - Domain name
 - `records` - Records
+
+# Put
+
+## Put domain records
+
+To put domain records simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.put.domainRecords(domain, records);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `records` - Records
+
+## Put domain dns records
+
+To put domain dns records simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.put.domainDnsRecords(
+  domain,
+  type,
+  name,
+  records,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `type` - Type
+- `name` - Name
+- `records` - Records
+- `xShopperId` - Shopper ID
+
+## Put domain dns records by type
+
+To put domain dns records by type simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.put.domainDnsRecordsByType(
+  domain,
+  type,
+  records,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `type` - Type
+- `records` - Records
+- `xShopperId` - Shopper ID
+
+## Put customer forward info by Fqdn
+
+To put customer forward info by Fqdn simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.put.customerForwardInfoByFqdn(
+  customerId,
+  fqdn,
+  body,
+);
+```
+
+It receives the following arguments:
+
+- `customerId` - Customer ID
+- `fqdn` - Fqdn
+- `body` - Body
+
+## Put customer domain notification
+
+To put customer domain notification simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.put.customerDomainNotification(
+  customerId,
+  type,
+  xRequestId?
+);
+```
+
+It receives the following arguments:
+
+- `customerId` - Customer ID
+- `type` - Type
+- `xRequestId` - Request ID
