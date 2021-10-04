@@ -523,3 +523,89 @@ It receives the following arguments:
 - `customerId` - Customer ID
 - `notificationId` - Notification ID
 - `xRequestId` - Request ID
+
+# Delete
+
+## Delete domain
+
+To delete domain simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.delete.domain(domain);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+
+## Delete domain privacy
+
+To delete domain privacy simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.delete.domainPrivacy(
+  domain,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `xShopperId` - Shopper ID
+
+## Delete domain dns records
+
+To delete domain dns records simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.delete.domainDnsRecords(
+  domain,
+  type,
+  name,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `type` - Type
+- `name` - Name
+- `xShopperId` - Shopper ID
+
+## Delete customer domain by Fqdn
+
+To delete customer domain by Fqdn simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.delete.customerDomainByFqdn(
+  customerId,
+  fqdn,
+);
+```
+
+It receives the following arguments:
+
+- `customerId` - Customer ID
+- `fqdn` - Fqdn
+
+## Delete customer recent domain action
+
+To delete customer recent domain action simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.delete.customerRecentDomainAction(
+  customerId,
+  domain,
+  type,
+  xRequestId?
+);
+```
+
+It receives the following arguments:
+
+- `customerId` - Customer ID
+- `domain` - Domain name
+- `type` - Type
+- `xRequestId` - Request ID
