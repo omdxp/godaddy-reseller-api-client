@@ -54,7 +54,15 @@ Considering that you already have instanciate the `Client` object as shown [here
 To get domains simply write:
 
 ```js
-const { status, data } = await c.domainsAPIs.get.domains(statuses, statusGroups, limit, marker,  includes, modifiedDate, xShopperId?);
+const { status, data } = await c.domainsAPIs.get.domains(
+  statuses,
+  statusGroups,
+  limit,
+  marker,
+  includes,
+  modifiedDate,
+  xShopperId?
+);
 ```
 
 It receives the following arguments:
@@ -316,4 +324,202 @@ It receives the following arguments:
 
 - `customerId` - Customer ID
 - `type` - Notification type
+- `xRequestId` - Request ID
+
+# Post
+
+## Post available
+
+To post available domains simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.available(domains, checkType);
+```
+
+It receives the following arguments:
+
+- `domains` - Array of domains
+- `checkType` - Check type
+
+## Post contacts validate
+
+To post contacts validate simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.contactsValidate(
+  body,
+  xPrivateLabelId?,
+  marketId?
+);
+```
+
+It receives the following arguments:
+
+- `body` - Body
+- `xPrivateLabelId` - Private label ID
+- `marketId` - Market ID
+
+## Post purchase
+
+To post purchase simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.purchase(
+  body,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `body` - Body
+- `xShopperId` - Shopper ID
+
+## Post purchase validate
+
+To post purchase validate simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.purchaseValidate(body);
+```
+
+It receives the following arguments:
+
+- `body` - Body
+
+## Post privacy purchase
+
+To post privacy purchase simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.privacyPurchase(
+  domain,
+  body,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `body` - Body
+- `xShopperId` - Shopper ID
+
+## Post renew domain
+
+To post renew domain simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.renewDomain(
+  domain,
+  body,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `body` - Body
+- `xShopperId` - Shopper ID
+
+## Post transfer domain
+
+To post transfer domain simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.transferDomain(
+  domain,
+  body,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `body` - Body
+- `xShopperId` - Shopper ID
+
+## Post resend verification email
+
+To post resend verification email simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.resendVerificationEmail(
+  domain,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `xShoppertId` - Shopper ID
+
+## Post customer redeem
+
+To post customer redeem simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.customerRedeem(
+  customerId,
+  body,
+  xRequestId?
+);
+```
+
+It receives the following arguments:
+
+- `customerId` - Customer ID
+- `body` - Body
+- `xRequestId` - Request ID
+
+## Post customer transfer out
+
+To post customer transfer out simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.customerTransferOut(
+  customerId,
+  domain,
+  registrar,
+  xRequestId?
+);
+```
+
+## Post customer forward config by Fqdn
+
+To post customer forward config by Fqdn simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.customerForwardConfigByFqdn(
+  customerId,
+  fqdn,
+  body,
+);
+```
+
+It receives the following arguments:
+
+- `customerId` - Customer ID
+- `fqdn` - Fqdn
+- `body` - Body
+
+## Post customer domain acknowledge
+
+To post customer domain acknowledge simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.post.customerDomainAcknowledge(
+  customerId,
+  notificationId,
+  xRequestId?
+);
+```
+
+It receives the following arguments:
+
+- `customerId` - Customer ID
+- `notificationId` - Notification ID
 - `xRequestId` - Request ID
