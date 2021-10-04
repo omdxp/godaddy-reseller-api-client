@@ -32,8 +32,11 @@ There are many APIs that can be used to manage domains. The following APIs are a
   - [Customer forward config by Fqdn](#post-customer-forward-config-by-fqdn)
   - [Customer domain acknowledge](#post-customer-domain-acknowledge)
 - [Delete](#delete)
-  - [domain](#delete-domain)
-  - [domainPrivacy](#delete-domain-privacy)
+  - [Domain](#delete-domain)
+  - [Domain privacy](#delete-domain-privacy)
+  - [Domain dns records](#delete-domain-dns-records)
+  - [Customer domain by Fqdn](#delete-customer-domain-by-fqdn)
+  - [Customer recent domain action](#delete-customer-recent-domain-action)
 - [Patch](#patch)
   - [Domain](#patch-domain)
   - [Domain contacts](#patch-domain-contacts)
@@ -609,3 +612,57 @@ It receives the following arguments:
 - `domain` - Domain name
 - `type` - Type
 - `xRequestId` - Request ID
+
+# Patch
+
+## Patch domain
+
+To patch domain simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.patch.domain(
+  domain,
+  body,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `body` - Body
+- `xShopperId` - Shopper ID
+
+## Patch domain contacts
+
+To patch domain contacts simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.patch.domainContacts(
+  domain,
+  contacts,
+  xShopperId?
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `contacts` - Contacts
+- `xShopperId` - Shopper ID
+
+## Patch domain records
+
+To patch domain records simply write:
+
+```js
+const { status, data } = await c.domainsAPIs.patch.domainRecords(
+  domain,
+  records,
+);
+```
+
+It receives the following arguments:
+
+- `domain` - Domain name
+- `records` - Records
