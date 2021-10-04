@@ -94,3 +94,19 @@ It receives the following arguments:
 - auditClientIp: the audit client ip
 
 # Put
+
+## Put shopper subcaccount password
+
+To put shopper subaccount password simply write:
+
+```js
+const { status, data } = await c.shoppersAPIs.put.shopperSubaccountPassword(
+  shopperId,
+  secret,
+);
+```
+
+It receives the following arguments:
+
+- shopperId: the shopper id
+- secret: the secret
