@@ -77,4 +77,20 @@ It receives the following arguments:
 
 # Delete
 
+## Delete shopper
+
+To delete shopper simply write:
+
+```js
+const { status, data } = await c.shoppersAPIs.delete.shopper(
+  shopperId,
+  auditClientIp,
+);
+```
+
+It receives the following arguments:
+
+- shopperId: the shopper id
+- auditClientIp: the audit client ip
+
 # Put
