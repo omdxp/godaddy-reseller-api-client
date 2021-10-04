@@ -48,6 +48,33 @@ It receives the following arguments:
 
 # Post
 
+## Post shopper
+
+To post shopper simply write:
+
+```js
+const { status, data } = await c.shoppersAPIs.post.shopper(shopperId, shopper);
+```
+
+It receives the following arguments:
+
+- shopperId: the shopper id
+- shopper: the shopper object
+
+## Post shopper subaccounr
+
+To post shopper subaccount simply write:
+
+```js
+const { status, data } = await c.shoppersAPIs.post.shopperSubaccount(
+  subaccount,
+);
+```
+
+It receives the following arguments:
+
+- subaccount: the subaccount object
+
 # Delete
 
 # Put
