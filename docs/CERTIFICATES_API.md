@@ -360,4 +360,34 @@ It receives the following arguments:
 
 # Delete
 
+## Delete certificate callback
+
+To delete certificate callback simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.delete.certificateCallback(
+  certificateId,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to delete certificate callback for.
+
 # Put
+
+## Put certificate callback
+
+To put certificate callback simply write:
+
+```js
+const { status, data } = await c.certificatesAPI.put.certificateCallback(
+  certificateId,
+  callbackUrl,
+);
+```
+
+It receives the following arguments:
+
+- `certificateId` - The id of the certificate to put certificate callback for.
+- `callbackUrl` - The callback url to put.
