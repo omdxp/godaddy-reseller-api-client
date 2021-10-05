@@ -6,7 +6,7 @@ on:
 
 jobs:
   publish-npm:
-    name: 🚀 publish
+    name: 🚀 NPM publish
     runs-on: ubuntu-latest
 
     strategy:
@@ -30,6 +30,32 @@ jobs:
         run: yarn build
 
       - name: 🚀 publish
-        run: npm publish --access public
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+  publish-gpr:
+    name: 🚀 GPR publish
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://npm.pkg.github.com/
+
+      - name: 📦 install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: ☄️ build
+        run: yarn build
+
+      - name: 🚀 publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

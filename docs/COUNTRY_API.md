@@ -3,8 +3,8 @@
 There are many APIs that can be used for countries. The following APIs are available:
 
 - [Get](#get)
-  [Get countries](#get-countries)
-  [Get country](#get-country)
+  - [Get countries](#get-countries)
+  - [Get country](#get-country)
 
 Considering that you already have instanciate the `Client` object as shown [here](./INSTANCIATE_CLIENT_CLASS.md).
 
