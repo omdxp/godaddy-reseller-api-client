@@ -1,5 +1,5 @@
 {
-  "name": "godaddy-reseller-api-client",
+  "name": "godaddy-reseller-api-client-test",
   "version": "1.0.0",
   "description": "This wrapper client allows easy access to GoDaddy reseller api.",
   "main": "dist/index.js",
