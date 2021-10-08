@@ -1,7 +1,7 @@
-const fs = require("fs");
+import fs from "fs";
 
-const package = require("./package.json");
+const p = JSON.parse(fs.readFileSync("./package.json", "utf8"));
 
-package.name = `@Omar-Belghaouti/${package.name}`;
+p.name = `@Omar-Belghaouti/${p.name}`;
 
-fs.writeFileSync("./package.json", JSON.stringify(package, null, 2));
+fs.writeFileSync("./package.json", JSON.stringify(p, null, 2));
