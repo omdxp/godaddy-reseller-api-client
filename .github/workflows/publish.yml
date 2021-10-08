@@ -29,6 +29,11 @@ jobs:
       - name: ☄️ build
         run: yarn build
 
+      - name: 🐱‍👤 create .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
+
+      - name:
+
       - name: 🚀 publish
         run: npm publish
         env:
@@ -54,6 +59,9 @@ jobs:
 
       - name: ☄️ build
         run: yarn build
+
+      - name: 🐱‍👤 create .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
 
       - name: 🚀 publish
         run: npm publish
