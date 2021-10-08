@@ -59,7 +59,7 @@ jobs:
         run: yarn build
 
       - name: 🐱‍👤 create .npmrc
-        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
+        run: echo "@Omar-Belghaouti:registry=https://npm.pkg.github.com" > .npmrc
 
       - name: 🚀 publish
         run: npm publish
