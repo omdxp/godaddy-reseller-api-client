@@ -29,8 +29,11 @@ jobs:
       - name: ☄️ build
         run: yarn build
 
+      - name: 🐱‍👤 create .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
+
       - name: 🚀 publish
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
@@ -55,7 +58,13 @@ jobs:
       - name: ☄️ build
         run: yarn build
 
+      - name: 🐱‍👤 create .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
+
+      - name: 🐱‍🏍 prepare gpr
+        run: node prepare-gpr.js
+
       - name: 🚀 publish
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
