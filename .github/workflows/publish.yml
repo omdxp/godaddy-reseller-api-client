@@ -32,8 +32,6 @@ jobs:
       - name: 🐱‍👤 create .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
 
-      - name:
-
       - name: 🚀 publish
         run: npm publish
         env:
